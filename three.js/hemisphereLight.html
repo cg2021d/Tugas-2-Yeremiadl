@@ -1,0 +1,130 @@
+<html>
+<head>
+    <title>Tugas 2 - threejs</title>
+
+    <style>
+    	body{
+    		margin: 0;
+    		overflow: hidden;
+        }
+
+        canvas{
+            background: red;
+        }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="myCanvas"></canvas>
+
+    <script src="three.js"></script>
+    <script>
+
+        //RENDERER
+        var renderer = new THREE.WebGLRenderer({canvas: document.getElementById('myCanvas'), antialias: true});
+        renderer.setClearColor(0xeb7734);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        //CAMERA
+        var camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 3000);
+        // var camera = new THREE.OrthographicCamera
+        //(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 3000);
+
+        //SCENE
+        var scene = new THREE.Scene();
+
+        //LIGHTS
+        
+        var light = new THREE.HemisphereLight( 0x00eeff, 0x9e6634, 1 );
+        scene.add(light);
+
+        //MATERIALS
+
+        //OBJECT
+        var geometry = new THREE.TetrahedronGeometry(100,0);
+        var material = new THREE.MeshLambertMaterial({color: 0xF3FFE2, emissive: 0x99bfa6});
+        var mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(0, 0, -1000);
+
+        scene.add(mesh);
+    
+        var geometry2 = new THREE.RingGeometry(50, 100, 32);
+        var material2 = new THREE.MeshLambertMaterial({
+            color: 0xc71875,
+            transparent : true,
+            opacity :  1,
+            wireframe : true,
+            wireframeLinewidth : 6});
+        var mesh2 = new THREE.Mesh(geometry2, material2);
+        mesh2.position.z = -1000;
+        mesh2.position.x = 200;
+        scene.add(mesh2);
+
+        var geometry3 = new THREE.SphereGeometry(50, 20, 20);
+        var material3 = new THREE.MeshBasicMaterial({color: 0x9b38a8,wireframe : true,
+            wireframeLinewidth : 6});
+        var mesh3 = new THREE.Mesh(geometry3, material3);
+        mesh3.position.z = -1000;
+        mesh3.position.x = -200;
+        scene.add(mesh3);
+
+        var geometry4 = new THREE.SphereGeometry(100,1);
+        var material4 = new THREE.MeshDepthMaterial({color: 0x3874a8});
+        var mesh4 = new THREE.Mesh(geometry4, material4);
+        mesh4.position.z = -1000;
+        mesh4.position.x = -200;
+         mesh4.position.y= -200
+        scene.add(mesh4);
+
+        var geometry5 = new THREE.IcosahedronGeometry(100,1);
+        var material5 = new THREE.MeshPhongMaterial({
+        shinines: 30});
+        var mesh5 = new THREE.Mesh(geometry5, material5);
+        mesh5.position.z = -1000;
+        mesh5.position.x = 0;
+         mesh5.position.y= -200
+        scene.add(mesh5);
+
+        var geometry6 = new THREE.OctahedronGeometry(100,1);
+        var material6 = new THREE.MeshLambertMaterial({color: 0x73fc03});
+        var mesh6 = new THREE.Mesh(geometry6, material6);
+        mesh6.position.z = -1000;
+        mesh6.position.x = 200;
+         mesh6.position.y= -200
+        scene.add(mesh6);
+
+
+      
+        
+
+
+        //RENDER LOOP
+        requestAnimationFrame(render);S
+
+        function render() {
+            mesh.rotation.x += 0.01;
+            mesh.rotation.y += 0.01;
+
+            mesh2.rotation.x += 0.02;
+            mesh2.rotation.y += 0.02;
+
+            mesh3.rotation.x += 0.01;
+            mesh3.rotation.y += 0.01;
+
+            mesh4.rotation.x += 0.01;
+            mesh4.rotation.y += 0.01;
+
+            mesh5.rotation.x += 0.01;
+            mesh5.rotation.y += 0.01;
+            
+            mesh6.rotation.x += 0.01;
+            mesh6.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+            requestAnimationFrame(render);
+        }
+    </script>
+</body>
+</html>
